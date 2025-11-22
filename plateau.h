@@ -1,7 +1,3 @@
-//
-// Created by vivie on 15/11/2025.
-//
-
 #ifndef TETRIS_PLATEAU_H
 #define TETRIS_PLATEAU_H
 

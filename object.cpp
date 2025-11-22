@@ -62,51 +62,56 @@ glm::vec3 Object::getPosition() const
     return position;
 }
 
+//Descendre l'objet
 void Object::descend()
 {
     position.z = position.z - 2;
 }
 
+//Tourner l'objet d'un angle de 90 degrés
 void Object::rotation()
 {
     rotationAngles.y = rotationAngles.y + glm::radians(90.0);
 }
 
+//Déplacer l'objet sur la gauche
 void Object::moveLeft()
 {
     position.x = position.x - 2;
 }
 
+//Déplacer l'objet sur la droite
 void Object::moveRight()
 {
     position.x = position.x + 2;
 }
 
+//Dessiner les pièces
 Object Object::getBaton()
 {
-    std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec3> ver;
+    std::vector<glm::vec2> uv;
     for (int i = 0; i < 4; i++)
     {
         glm::mat4 trans = glm::translate(glm::mat4(1), glm::vec3(i * 2, 0, 0));
         for (auto v : vertices)
         {
             glm::vec4 vector = trans * glm::vec4(v, 1.0f);
-            vertices.push_back(glm::vec3(vector));
+            ver.push_back(glm::vec3(vector));
         }
     }
     for (auto v : uvs)
     {
-        uvs.push_back(v);
+        uv.push_back(v);
     }
 
-    return Object(vertices, uvs, "/textures/texture.jpg");
+    return Object(ver, uv, "/textures/texture.jpg");
 }
 
 Object Object::getCarre()
 {
-    std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec3> ver;
+    std::vector<glm::vec2> uv;
     for (int i = 0; i < 2; i++)
     {
         for (int j = 0; j < 2; j++)
@@ -115,29 +120,29 @@ Object Object::getCarre()
             for (auto v : vertices)
             {
                 glm::vec4 vector = trans * glm::vec4(v, 1.0f);
-                vertices.push_back(glm::vec3(vector));
+                ver.push_back(glm::vec3(vector));
             }
         }
     }
     for (auto v : uvs)
     {
-        uvs.push_back(v);
+        uv.push_back(v);
     }
 
-    return Object(vertices, uvs, "/textures/texture.jpg");
+    return Object(ver, uv, "/textures/texture.jpg");
 }
 
 Object Object::getLdroite()
 {
-    std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec3> ver;
+    std::vector<glm::vec2> uv;
     for (int i = 0; i < 3; i++)
     {
         glm::mat4 trans = glm::translate(glm::mat4(1), glm::vec3(i * 2, 0, 0));
         for (auto v : vertices)
         {
             glm::vec4 vector = trans * glm::vec4(v, 1.0f);
-            vertices.push_back(glm::vec3(vector));
+            ver.push_back(glm::vec3(vector));
         }
     }
 
@@ -145,27 +150,27 @@ Object Object::getLdroite()
     for (auto v : vertices)
     {
         glm::vec4 vector = trans * glm::vec4(v, 1.0f);
-        vertices.push_back(glm::vec3(vector));
+        ver.push_back(glm::vec3(vector));
     }
 
     for (auto v : uvs)
     {
-        uvs.push_back(v);
+        uv.push_back(v);
     }
 
-    return Object(vertices, uvs, "/textures/texture.jpg");
+    return Object(ver, uv, "/textures/texture.jpg");
 }
 
 Object Object::getLgauche()
 {
-    std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec3> ver;
+    std::vector<glm::vec2> uv;
 
     glm::mat4 transf = glm::translate(glm::mat4(1), glm::vec3( 0, 0, 2));
     for (auto v : vertices)
     {
         glm::vec4 vector = transf * glm::vec4(v, 1.0f);
-        vertices.push_back(glm::vec3(vector));
+        ver.push_back(glm::vec3(vector));
     }
 
     for (int i = 0; i < 3; i++)
@@ -174,28 +179,28 @@ Object Object::getLgauche()
         for (auto v : vertices)
         {
             glm::vec4 vector = trans * glm::vec4(v, 1.0f);
-            vertices.push_back(glm::vec3(vector));
+            ver.push_back(glm::vec3(vector));
         }
     }
 
     for (auto v : uvs)
     {
-        uvs.push_back(v);
+        uv.push_back(v);
     }
 
-    return Object(vertices, uvs, "/textures/texture.jpg");
+    return Object(ver, uv, "/textures/texture.jpg");
 }
 
 Object Object::getTquadri()
 {
-    std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec3> ver;
+    std::vector<glm::vec2> uv;
 
     glm::mat4 transf = glm::translate(glm::mat4(1), glm::vec3( 2, 0, 2));
     for (auto v : vertices)
     {
         glm::vec4 vector = transf * glm::vec4(v, 1.0f);
-        vertices.push_back(glm::vec3(vector));
+        ver.push_back(glm::vec3(vector));
     }
 
     for (int i = 0; i < 3; i++)
@@ -204,29 +209,29 @@ Object Object::getTquadri()
         for (auto v : vertices)
         {
             glm::vec4 vector = trans * glm::vec4(v, 1.0f);
-            vertices.push_back(glm::vec3(vector));
+            ver.push_back(glm::vec3(vector));
         }
     }
 
     for (auto v : uvs)
     {
-        uvs.push_back(v);
+        uv.push_back(v);
     }
 
-    return Object(vertices, uvs, "/textures/texture.jpg");
+    return Object(ver, uv, "/textures/texture.jpg");
 }
 
 Object Object::getZdroite()
 {
-    std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec3> ver;
+    std::vector<glm::vec2> uv;
     for (int i = 0; i < 2; i++)
     {
         glm::mat4 trans = glm::translate(glm::mat4(1), glm::vec3(i * 2, 0, 2));
         for (auto v : vertices)
         {
             glm::vec4 vector = trans * glm::vec4(v, 1.0f);
-            vertices.push_back(glm::vec3(vector));
+            ver.push_back(glm::vec3(vector));
         }
     }
 
@@ -236,29 +241,29 @@ Object Object::getZdroite()
         for (auto v : vertices)
         {
             glm::vec4 vector = trans * glm::vec4(v, 1.0f);
-            vertices.push_back(glm::vec3(vector));
+            ver.push_back(glm::vec3(vector));
         }
     }
 
     for (auto v : uvs)
     {
-        uvs.push_back(v);
+        uv.push_back(v);
     }
 
-    return Object(vertices, uvs, "/textures/texture.jpg");
+    return Object(ver, uv, "/textures/texture.jpg");
 }
 
 Object Object::getZgauche()
 {
-    std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> uvs;
+    std::vector<glm::vec3> ver;
+    std::vector<glm::vec2> uv;
     for (int i = 0; i < 2; i++)
     {
         glm::mat4 trans = glm::translate(glm::mat4(1), glm::vec3(i * 2, 0, 0));
         for (auto v : vertices)
         {
             glm::vec4 vector = trans * glm::vec4(v, 1.0f);
-            vertices.push_back(glm::vec3(vector));
+            ver.push_back(glm::vec3(vector));
         }
     }
 
@@ -268,14 +273,14 @@ Object Object::getZgauche()
         for (auto v : vertices)
         {
             glm::vec4 vector = trans * glm::vec4(v, 1.0f);
-            vertices.push_back(glm::vec3(vector));
+            ver.push_back(glm::vec3(vector));
         }
     }
 
     for (auto v : uvs)
     {
-        uvs.push_back(v);
+        uv.push_back(v);
     }
 
-    return Object(vertices, uvs, "/textures/texture.jpg");
+    return Object(ver, uv, "/textures/texture.jpg");
 }

@@ -212,6 +212,7 @@ int main()
 
     //Game
     Game game;
+    renderer.Clear();
 
     while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && !glfwWindowShouldClose(window)){
 
@@ -238,6 +239,7 @@ int main()
         plateau.build(o,cam,shader,renderer,va);
         Object piece = game.choosePiece(o);
         game.renderPiece(piece, cam, shader, renderer, va);
+        game.isLign();
 
 
         ////////////////Partie rafraichissement de l'image et des évènements///////////////

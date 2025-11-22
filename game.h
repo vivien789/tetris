@@ -1,7 +1,3 @@
-//
-// Created by vivie on 15/11/2025.
-//
-
 #ifndef TETRIS_GAME_H
 #define TETRIS_GAME_H
 

@@ -16,7 +16,7 @@ void NavigationControls::update(float deltaTime, Shader *shader)
     // On test d'abord si on est sur la fenêtre imgui ou pas
     if (/*!io.WantCaptureMouse*/true){
 
-        int state = glfwGetMouseButton(m_Window, GLFW_MOUSE_BUTTON_LEFT);
+        /*int state = glfwGetMouseButton(m_Window, GLFW_MOUSE_BUTTON_LEFT);
         double xpos, ypos;
         glfwGetCursorPos(m_Window, &xpos, &ypos);
         if(state == GLFW_PRESS){
@@ -88,7 +88,7 @@ void NavigationControls::update(float deltaTime, Shader *shader)
         // go down
         if (glfwGetKey(m_Window, GLFW_KEY_LEFT_SHIFT ) == GLFW_PRESS){
             m_Camera->position -= up * deltaTime * speed;
-        }
+        }*/
 
         // left object (press K)
         if (glfwGetKey(m_Window, GLFW_KEY_K ) == GLFW_PRESS){

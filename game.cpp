@@ -1,7 +1,3 @@
-//
-// Created by vivie on 15/11/2025.
-//
-
 #include "game.h"
 #include <random>
 #include <iostream>
@@ -49,6 +45,7 @@ Object Game::choosePiece(Object piece)
     }
 }
 
+//Rendu visuel des pièces
 void Game::renderPiece(Object piece, Camera cam, Shader shader, Renderer renderer, VertexArray va)
 {
     glm::mat4 m;
@@ -63,10 +60,10 @@ void Game::renderPiece(Object piece, Camera cam, Shader shader, Renderer rendere
 
     mvp = p*v*m;
     shader.setUniformMat4f("MVP", mvp);
-    renderer.Clear();
     renderer.Draw(va, piece, shader);
 }
 
+//Liste d'objets : ajout d'une nouvelle pièce avec ses coordonnées
 void Game::saveInStock(Object piece, Camera cam, Shader shader, Renderer renderer, VertexArray va)
 {
     stock.insert(stock.begin(), piece);
@@ -77,9 +74,11 @@ void Game::saveInStock(Object piece, Camera cam, Shader shader, Renderer rendere
 
 }
 
+//Vrai si au moins une ligne est complète, faux sinon
 bool Game::isLign()
 {
     bool detect = false;
+    //Tester pour chaque hauteur du plateau
     for (int z=2; z<=24; z+2)
     {
         std::list<int> posX;
@@ -91,6 +90,7 @@ bool Game::isLign()
             }
         }
         posX.unique();
+        //Tester si toutes les positions en x sont occupées
         if (posX.size() == 10)
         {
             detect = true;
@@ -107,6 +107,7 @@ bool Game::isLign()
     return detect;
 }
 
+//Supprimer les lignes complètes via l'attribut "toDelete"
 void Game::deleteLine(Camera cam, Shader shader, Renderer renderer, VertexArray va)
 {
     for (std::list<Object>::iterator it = stock.begin(); it != stock.end();)
@@ -126,6 +127,3 @@ void Game::deleteLine(Camera cam, Shader shader, Renderer renderer, VertexArray 
         renderPiece(p, cam, shader, renderer, va);
     }
 }
-
-
-
