@@ -82,7 +82,7 @@ bool Game::isLign()
 {
     bool detect = false;
     //Tester pour chaque hauteur du plateau
-    for (int z=2; z<=24; z+2)
+    for (int z=2; z<=24; z+=2)
     {
         std::list<int> posX;
         for (auto p : stock)
@@ -92,6 +92,7 @@ bool Game::isLign()
                 posX.push_back(p.position.x);
             }
         }
+        posX.sort();
         posX.unique();
         //Tester si toutes les positions en x sont occupées
         if (posX.size() == 10)

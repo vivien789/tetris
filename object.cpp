@@ -150,6 +150,7 @@ Object Object::getLdroite()
 {
     std::vector<glm::vec3> ver;
     std::vector<glm::vec2> uv;
+
     for (int i = 0; i < 3; i++)
     {
         glm::mat4 trans = glm::translate(glm::mat4(1), glm::vec3(i * 2, 0, 0));
