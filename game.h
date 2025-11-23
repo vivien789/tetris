@@ -16,9 +16,12 @@ public:
     Object choosePiece(Object piece);
     void renderPiece(Object piece, Camera cam, Shader shader, Renderer renderer, VertexArray va);
     void saveInStock(Object piece, Camera cam, Shader shader, Renderer renderer, VertexArray va);
-    void deleteLine(Camera cam, Shader shader, Renderer renderer, VertexArray va);
+    void deleteLine();
+    void descendLine(Camera cam, Shader shader, Renderer renderer, VertexArray va);
     bool isLign();
+    bool borderTest(Object piece);
     std::list<Object> stock;
+    std::list<int> zDeleted;
 };
 
 

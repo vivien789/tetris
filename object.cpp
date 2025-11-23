@@ -77,13 +77,27 @@ void Object::rotation()
 //Déplacer l'objet sur la gauche
 void Object::moveLeft()
 {
-    position.x = position.x - 2;
+    if (position.x >= 2)
+    {
+        position.x = position.x - 2;
+    }
+    else
+    {
+        position.x = 0;
+    }
 }
 
 //Déplacer l'objet sur la droite
 void Object::moveRight()
 {
-    position.x = position.x + 2;
+    if (position.x <= 18)
+    {
+        position.x = position.x + 2;
+    }
+    else
+    {
+        position.x = 20;
+    }
 }
 
 //Dessiner les pièces

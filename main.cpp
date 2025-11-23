@@ -216,31 +216,25 @@ int main()
 
     while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && !glfwWindowShouldClose(window)){
 
-        currentTime = glfwGetTime();
-        deltaTime = currentTime-lastTime;
-        lastTime = currentTime;
-
-        controls.update(deltaTime, &shader);
-        //o.rotationAngles.y=currentTime;
-        //o.position.x=-2;
-
-        //cam.computeMatrices(width, height);
-        //m = o.getModelMatrix();
-        //v = cam.getViewMatrix();
-        //p = cam.getProjectionMatrix();
-
-        //mvp = p*v*m;
-        //shader.setUniformMat4f("MVP", mvp);
-
-        ////////////////On commence par vider les buffers///////////////
-        //renderer.Clear();
-        //renderer.Draw(va, o, shader);
-
         plateau.build(o,cam,shader,renderer,va);
         Object piece = game.choosePiece(o);
-        game.renderPiece(piece, cam, shader, renderer, va);
-        game.isLign();
 
+        while (game.borderTest(piece) != true)
+        {
+            currentTime = glfwGetTime();
+            deltaTime = currentTime-lastTime;
+            lastTime = currentTime;
+            controls.update(deltaTime, &shader);
+            game.renderPiece(piece, cam, shader, renderer, va);
+        }
+
+        game.saveInStock(piece, cam, shader, renderer, va);
+        game.isLign();
+        if (game.isLign())
+        {
+            game.deleteLine();
+            game.descendLine(cam, shader, renderer, va);
+        }
 
         ////////////////Partie rafraichissement de l'image et des évènements///////////////
         //Swap buffers : frame refresh
@@ -249,8 +243,7 @@ int main()
         glfwPollEvents();
     }
     glfwTerminate();
-
-
+    cout<<"Game over!"<<endl;
 
 
     return 0;

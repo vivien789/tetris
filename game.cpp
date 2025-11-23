@@ -6,6 +6,7 @@
 Game::Game()
 {
     stock = {};
+    zDeleted = {};
 }
 
 Object Game::choosePiece(Object piece)
@@ -99,6 +100,7 @@ bool Game::isLign()
                 if (p.position.z == z)
                 {
                     p.toDelete = true;
+                    zDeleted.push_back(z);
                 }
             }
         }
@@ -108,7 +110,7 @@ bool Game::isLign()
 }
 
 //Supprimer les lignes complètes via l'attribut "toDelete"
-void Game::deleteLine(Camera cam, Shader shader, Renderer renderer, VertexArray va)
+void Game::deleteLine()
 {
     for (std::list<Object>::iterator it = stock.begin(); it != stock.end();)
     {
@@ -121,9 +123,40 @@ void Game::deleteLine(Camera cam, Shader shader, Renderer renderer, VertexArray 
             ++it;
         }
     }
+}
 
+//Tester si la pièce a atteint le bord
+bool Game::borderTest(Object piece)
+{
+    bool res = false;
+    if (piece.position.z == 2)
+    {
+        res = true;
+    }
+    for (auto obj : stock)
+    {
+        if (obj.position.x == piece.position.x &&  obj.position.z == piece.position.z - 1 )
+        {
+            res = true;
+        }
+    }
+    return res;
+}
+
+//Descendre les pièces une fois les lignes supprimées
+void Game::descendLine(Camera cam, Shader shader, Renderer renderer, VertexArray va)
+{
     for (auto p : stock)
     {
+        for (auto zDel : zDeleted)
+        {
+            if (p.position.z > zDel)
+            {
+                p.descend();
+            }
+        }
         renderPiece(p, cam, shader, renderer, va);
     }
+    //Réinitialiser l'attribut zDeleted
+    zDeleted.clear();
 }
