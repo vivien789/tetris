@@ -81,7 +81,7 @@ void Object::moveLeft()
     {
         position.x = position.x - 2;
     }
-    else
+    else //empêcher le déplacement infini vers la gauche
     {
         position.x = 0;
     }
@@ -94,13 +94,13 @@ void Object::moveRight()
     {
         position.x = position.x + 2;
     }
-    else
+    else //empêcher le déplacement infini vers la droite
     {
         position.x = 20;
     }
 }
 
-//Dessiner les pièces
+//Dessiner chaque pièces
 Object Object::getBaton()
 {
     std::vector<glm::vec3> ver;

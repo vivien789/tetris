@@ -216,11 +216,13 @@ int main()
 
     while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && !glfwWindowShouldClose(window)){
 
+        //Apparition du plateau et d'une pièce aléatoire
         plateau.build(o,cam,shader,renderer,va);
         Object piece = game.choosePiece(o);
 
         while (game.borderTest(piece) != true)
         {
+            //Boucle où  la pièce descend et les autres mouvements de la pièce sont contrôlés par le joueur
             currentTime = glfwGetTime();
             deltaTime = currentTime-lastTime;
             lastTime = currentTime;
@@ -230,10 +232,10 @@ int main()
 
         game.saveInStock(piece, cam, shader, renderer, va);
         game.isLign();
-        if (game.isLign())
+        if (game.isLign()) //tester s'il existe au moins une ligne complète
         {
-            game.deleteLine();
-            game.descendLine(cam, shader, renderer, va);
+            game.deleteLine(); //supprimer la ligne
+            game.descendLine(cam, shader, renderer, va); //Descendre les objets supérieurs aux lignes supprimées
         }
 
         ////////////////Partie rafraichissement de l'image et des évènements///////////////

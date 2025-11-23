@@ -8,7 +8,7 @@ void Plateau::build(Object o, Camera cam, Shader shader, Renderer renderer, Vert
     glm::mat4 p;
     glm::mat4 mvp;
     //construction du plateau
-    //Ligne en dessous
+    //Ligne en bas du plateau
     for (int i = 0; i <= 11; i++) {
         cam.computeMatrices(600, 600);
         o.position.x=-2+2*i;

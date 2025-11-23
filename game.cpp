@@ -11,11 +11,13 @@ Game::Game()
 
 Object Game::choosePiece(Object piece)
 {
+    //Sélectionner une pièce aléatoire
     std::string tab[7] = {"tquadri", "baton","carre", "lgauche", "ldroite", "zgauche", "zdroite"};
     int indice = std::rand()%(sizeof(tab)/sizeof(tab[0]));
     std::string type = tab[indice];
-    piece.position = glm::vec3(11,0,24);
+    piece.position = glm::vec3(11,0,24); //Position initiale de la pièce
 
+    //Récupérer la pièce voulue
     if (type == "tquadri")
     {
         return piece.getTquadri();
@@ -99,8 +101,8 @@ bool Game::isLign()
             {
                 if (p.position.z == z)
                 {
-                    p.toDelete = true;
-                    zDeleted.push_back(z);
+                    p.toDelete = true; //Indique que la pièce présente sur cette ligne doit être supprimée
+                    zDeleted.push_back(z); //Ajout de la ligne z dans la liste des lignes à supprimer
                 }
             }
         }
@@ -112,6 +114,7 @@ bool Game::isLign()
 //Supprimer les lignes complètes via l'attribut "toDelete"
 void Game::deleteLine()
 {
+    //parcourir les pièces du plateau
     for (std::list<Object>::iterator it = stock.begin(); it != stock.end();)
     {
         if (it->toDelete == true)
@@ -120,22 +123,22 @@ void Game::deleteLine()
         }
         else
         {
-            ++it;
+            ++it; //passage à l'objet suivant
         }
     }
 }
 
-//Tester si la pièce a atteint le bord
+//Tester si la pièce a atteint le bord (bas du plateau ou position occupée par une autre pièce)
 bool Game::borderTest(Object piece)
 {
     bool res = false;
-    if (piece.position.z == 2)
+    if (piece.position.z == 2) //dernière ligne du plateau
     {
         res = true;
     }
     for (auto obj : stock)
     {
-        if (obj.position.x == piece.position.x &&  obj.position.z == piece.position.z - 1 )
+        if (obj.position.x == piece.position.x &&  obj.position.z == piece.position.z - 1 ) //Tester si un objet est présent en dessous
         {
             res = true;
         }
@@ -148,11 +151,11 @@ void Game::descendLine(Camera cam, Shader shader, Renderer renderer, VertexArray
 {
     for (auto p : stock)
     {
-        for (auto zDel : zDeleted)
+        for (auto zDel : zDeleted) //parcourir les lignes supprimées
         {
             if (p.position.z > zDel)
             {
-                p.descend();
+                p.descend(); //Descendre les pièces au-dessus de chaque ligne supprimée
             }
         }
         renderPiece(p, cam, shader, renderer, va);
